@@ -33,6 +33,9 @@ namespace RandomNumberGenerator
             amountNumericUpDown.Maximum = fromNumericUpDown.Maximum;
         }
 
+
+        #region Events
+
         private void generateButton_Click(object sender, EventArgs e)
         {
             var result = GetResult();
@@ -40,15 +43,15 @@ namespace RandomNumberGenerator
             ShowResult(result);
         }
 
-        private void ShowResult(int[] result)
+        private void copyButton_Click(object sender, EventArgs e)
         {
-            resultListBox.Items.Clear();
-
-            if (result == null)
-                return;
-
-            result.ForEach(x => resultListBox.Items.Add(x));
+            Copy();
         }
+
+        #endregion
+
+
+        #region Logic
 
         private int[] GetResult()
         {
@@ -73,6 +76,16 @@ namespace RandomNumberGenerator
             return result;
         }
 
+        private void ShowResult(int[] result)
+        {
+            resultListBox.Items.Clear();
+
+            if (result == null)
+                return;
+
+            result.ForEach(x => resultListBox.Items.Add(x));
+        }
+
         private void Copy()
         {
             if (resultListBox.Items.Count > 0)
@@ -83,9 +96,6 @@ namespace RandomNumberGenerator
             }
         }
 
-        private void copyButton_Click(object sender, EventArgs e)
-        {
-            Copy();
-        }
+        #endregion
     }
 }
