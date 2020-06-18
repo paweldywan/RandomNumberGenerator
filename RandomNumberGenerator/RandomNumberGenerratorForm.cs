@@ -24,6 +24,11 @@ namespace RandomNumberGenerator
         {
             InitializeComponent();
 
+            SetUpControls();
+        }
+
+        private void SetUpControls()
+        {
             fromNumericUpDown.Minimum = int.MinValue;
             fromNumericUpDown.Maximum = int.MaxValue;
 
@@ -78,7 +83,7 @@ namespace RandomNumberGenerator
 
         private void ShowResult(int[] result)
         {
-            resultListBox.Items.Clear();
+            resultListBox.ClearItemsIfExist();
 
             if (result == null)
                 return;
@@ -88,12 +93,8 @@ namespace RandomNumberGenerator
 
         private void Copy()
         {
-            if (resultListBox.Items.Count > 0)
-            {
-                string result = string.Join(", ", resultListBox.Items.Cast<int>());
-
-                Clipboard.SetText(result);
-            }
+            if(resultListBox.HasItems()) //Schowek ulegnie zmianie tylko wtedy, gdy istnieją elementy
+                Clipboard.SetText(resultListBox.GetItemsText());
         }
 
         #endregion
