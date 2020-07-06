@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PDCore.Extensions;
 using PDCore.Helpers;
+using PDCore.Utils;
 
 namespace RandomNumberGenerator
 {
@@ -29,13 +30,9 @@ namespace RandomNumberGenerator
 
         private void SetUpControls()
         {
-            fromNumericUpDown.Minimum = int.MinValue;
-            fromNumericUpDown.Maximum = int.MaxValue;
+            WinFormsUtils.SetMinAndMaxAsInt(fromNumericUpDown, toNumericUpDown);
 
-            toNumericUpDown.Minimum = fromNumericUpDown.Minimum;
-            toNumericUpDown.Maximum = fromNumericUpDown.Maximum;
-
-            amountNumericUpDown.Maximum = fromNumericUpDown.Maximum;
+            amountNumericUpDown.SetMaxAsInt();
         }
 
 
@@ -43,7 +40,7 @@ namespace RandomNumberGenerator
 
         private void generateButton_Click(object sender, EventArgs e)
         {
-            var result = GetResult();
+            int[] result = WinFormsUtils.GetRandomNumbers(fromNumericUpDown, toNumericUpDown, amountNumericUpDown);
 
             resultListBox.AddItems(result);
         }
@@ -51,34 +48,6 @@ namespace RandomNumberGenerator
         private void copyButton_Click(object sender, EventArgs e)
         {
             resultListBox.SetItemsTextToClipboard();
-        }
-
-        #endregion
-
-
-        #region Logic
-
-        private int[] GetResult()
-        {
-            int from = fromNumericUpDown.GetValueInt();
-
-            int to = toNumericUpDown.GetValueInt();
-
-            int amount = amountNumericUpDown.GetValueInt();
-
-
-            int[] result = null;
-
-            try
-            {
-                result = PDCore.Helpers.RandomNumberGenerator.Next(from, to, amount);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Błąd");
-            }
-
-            return result;
         }
 
         #endregion
