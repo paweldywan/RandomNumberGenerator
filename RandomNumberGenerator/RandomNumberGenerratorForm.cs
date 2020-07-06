@@ -30,24 +30,24 @@ namespace RandomNumberGenerator
 
         private void SetUpControls()
         {
-            WinFormsUtils.SetMinAndMaxAsInt(fromNumericUpDown, toNumericUpDown);
+            WinFormsUtils.SetMinAndMaxAsInt(FromNumericUpDown, ToNumericUpDown);
 
-            amountNumericUpDown.SetMaxAsInt();
+            AmountNumericUpDown.SetMaxAsInt();
         }
 
 
         #region Events
 
-        private void generateButton_Click(object sender, EventArgs e)
+        private void GenerateButton_Click(object sender, EventArgs e)
         {
-            int[] result = WinFormsUtils.GetRandomNumbers(fromNumericUpDown, toNumericUpDown, amountNumericUpDown);
+            int[] result = WinFormsUtils.GetRandomNumbers(FromNumericUpDown, ToNumericUpDown, AmountNumericUpDown);
 
-            resultListBox.AddItems(result);
+            ResultListBox.AddItems(result);
         }
 
-        private void copyButton_Click(object sender, EventArgs e)
+        private void CopyButton_Click(object sender, EventArgs e)
         {
-            resultListBox.SetItemsTextToClipboard();
+            ResultListBox.SetItemsTextToClipboard();
         }
 
         #endregion
