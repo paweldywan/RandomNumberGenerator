@@ -45,12 +45,12 @@ namespace RandomNumberGenerator
         {
             var result = GetResult();
 
-            ShowResult(result);
+            resultListBox.AddItems(result);
         }
 
         private void copyButton_Click(object sender, EventArgs e)
         {
-            Copy();
+            resultListBox.SetItemsTextToClipboard();
         }
 
         #endregion
@@ -79,22 +79,6 @@ namespace RandomNumberGenerator
             }
 
             return result;
-        }
-
-        private void ShowResult(int[] result)
-        {
-            resultListBox.ClearItemsIfExist();
-
-            if (result == null)
-                return;
-
-            result.ForEach(x => resultListBox.Items.Add(x));
-        }
-
-        private void Copy()
-        {
-            if(resultListBox.HasItems()) //Schowek ulegnie zmianie tylko wtedy, gdy istnieją elementy
-                Clipboard.SetText(resultListBox.GetItemsText());
         }
 
         #endregion
